@@ -6,7 +6,11 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	// initialise game objects
-
+	zombie = new Zombie;
+	zombieT.loadFromFile("gfx/animZombie.png");
+	zombie->setSize(sf::Vector2f(55, 108));
+	zombie->setPosition(100, 100);
+	zombie->setTexture(&zombieT);
 }
 
 Level::~Level()
@@ -23,21 +27,21 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
-
+	zombie->update(dt);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
-
+	window->draw(*zombie);
 	endDraw();
 }
 
 // clear back buffer
 void Level::beginDraw()
 {
-	window->clear(sf::Color(100, 149, 237));
+	window->clear(sf::Color(100, 100, 100));
 }
 
 // Ends rendering to the back buffer, and swaps buffer to the screen.
