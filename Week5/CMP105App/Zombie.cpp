@@ -2,9 +2,9 @@
 
 Zombie::Zombie()
 {
-	int x = 0;
+	int x = 55;
 	for(int i = 0; i < 8; i++){
-		walk.addFrame(sf::IntRect(0 + i*55, 0, 55, 108));
+		walk.addFrame(sf::IntRect(0 + i*x, 0, 55, 108));
 	}
 	walk.setFrameSpeed(animationSpeed);
 }
