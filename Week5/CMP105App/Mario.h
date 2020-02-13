@@ -19,6 +19,7 @@ private:
 	float animationSpeed = 0.2f;
 	float movementSpeed = 600.0f;
 	int selectedAnimation = 0;
+	bool isMoving = false;
 
 
 };

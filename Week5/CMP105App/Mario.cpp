@@ -1,4 +1,5 @@
 #include "Mario.h"
+#include <iostream>
 
 Mario::Mario()
 {
@@ -23,6 +24,8 @@ Mario::Mario()
 			selection[2]->addFrame(sf::IntRect(0 + i * x, 41, x, y));
 		}
 		selection[2]->setFrameSpeed(animationSpeed);
+		current->animate(0);
+		setTextureRect(current->getCurrentFrame());
 }
 
 Mario::~Mario()
@@ -31,25 +34,48 @@ Mario::~Mario()
 
 void Mario::handleInput(float dt)
 {
+	
 	velocity = sf::Vector2f(0.0f, 0.0f);
+	if (isMoving && 
+		!(input->isKeyDown(sf::Keyboard::Up)) &&
+		!(input->isKeyDown(sf::Keyboard::Down)) &&
+		!(input->isKeyDown(sf::Keyboard::Left)) &&
+		!(input->isKeyDown(sf::Keyboard::Right))) 
+	{
+		isMoving = false;
+		current->reset();
+		std::cout << "callBad" << std::endl;
+	}
+
+	std::cout << "-----" << std::endl;
+
 	if (input->isKeyDown(sf::Keyboard::Up)) {
+		isMoving = true;
 		velocity += sf::Vector2f(0.0f, -movementSpeed);
 		input->setKeyUp(sf::Keyboard::Up);
+		std::cout << "call1" << std::endl;
 	}
 	if (input->isKeyDown(sf::Keyboard::Right)) {
+		isMoving = true;
 		current->setFlipped(false);
 		velocity += sf::Vector2f(movementSpeed, 0.0f);
 		input->setKeyUp(sf::Keyboard::Right);
+		std::cout << "call2" << std::endl;
 	}
 	if (input->isKeyDown(sf::Keyboard::Down)) {
+		isMoving = true;
 		velocity += sf::Vector2f(0.0f, movementSpeed);
 		input->setKeyUp(sf::Keyboard::Down);
+		std::cout << "call3" << std::endl;
 	}
 	if (input->isKeyDown(sf::Keyboard::Left)) {
+		isMoving = true;
 		current->setFlipped(true);
 		velocity += sf::Vector2f(-movementSpeed, 0.0f);
 		input->setKeyUp(sf::Keyboard::Left);
+		std::cout << "call4" << std::endl;
 	}
+	
 	if (input->isKeyDown(sf::Keyboard::Space)) {
 		selectedAnimation++;
 		selectedAnimation %= 3;
@@ -61,7 +87,9 @@ void Mario::handleInput(float dt)
 
 void Mario::update(float dt)
 {
-	current->animate(dt);
-	setTextureRect(current->getCurrentFrame());
-	setPosition(getPosition() + velocity);
+	if (isMoving) {
+		current->animate(dt);
+		setTextureRect(current->getCurrentFrame());
+		setPosition(getPosition() + velocity);
+	}
 }
