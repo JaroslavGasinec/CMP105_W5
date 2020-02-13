@@ -44,43 +44,36 @@ void Mario::handleInput(float dt)
 	{
 		isMoving = false;
 		current->reset();
-		std::cout << "callBad" << std::endl;
+		setTextureRect(current->getCurrentFrame());
+		
 	}
 
-	std::cout << "-----" << std::endl;
+	
 
 	if (input->isKeyDown(sf::Keyboard::Up)) {
 		isMoving = true;
 		velocity += sf::Vector2f(0.0f, -movementSpeed);
-		input->setKeyUp(sf::Keyboard::Up);
-		std::cout << "call1" << std::endl;
 	}
 	if (input->isKeyDown(sf::Keyboard::Right)) {
 		isMoving = true;
 		current->setFlipped(false);
 		velocity += sf::Vector2f(movementSpeed, 0.0f);
-		input->setKeyUp(sf::Keyboard::Right);
-		std::cout << "call2" << std::endl;
 	}
 	if (input->isKeyDown(sf::Keyboard::Down)) {
 		isMoving = true;
 		velocity += sf::Vector2f(0.0f, movementSpeed);
-		input->setKeyUp(sf::Keyboard::Down);
-		std::cout << "call3" << std::endl;
 	}
 	if (input->isKeyDown(sf::Keyboard::Left)) {
 		isMoving = true;
 		current->setFlipped(true);
 		velocity += sf::Vector2f(-movementSpeed, 0.0f);
-		input->setKeyUp(sf::Keyboard::Left);
-		std::cout << "call4" << std::endl;
 	}
 	
 	if (input->isKeyDown(sf::Keyboard::Space)) {
+		input->setKeyUp(sf::Keyboard::Space);
 		selectedAnimation++;
 		selectedAnimation %= 3;
 		current = selection[selectedAnimation];
-		input->setKeyUp(sf::Keyboard::Space);
 	}
 	velocity *= dt;
 }

@@ -17,7 +17,7 @@ private:
 	Animation* selection[3]{&walk,&swim,&duck};
 	Animation* current;
 	float animationSpeed = 0.2f;
-	float movementSpeed = 600.0f;
+	float movementSpeed = 300.0f;
 	int selectedAnimation = 0;
 	bool isMoving = false;
 

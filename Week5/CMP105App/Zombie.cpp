@@ -18,21 +18,17 @@ void Zombie::handleInput(float dt)
 	velocity = sf::Vector2f(0.0f,0.0f);
 	if (input->isKeyDown(sf::Keyboard::W)) {
 		velocity += sf::Vector2f(0.0f,-movementSpeed);
-		input->setKeyUp(sf::Keyboard::W);
 	}
 	if (input->isKeyDown(sf::Keyboard::D)) {
 		walk.setFlipped(false);
 		velocity += sf::Vector2f(movementSpeed, 0.0f);
-		input->setKeyUp(sf::Keyboard::D);
 	}
 	if (input->isKeyDown(sf::Keyboard::S)) {
 		velocity += sf::Vector2f(0.0f,movementSpeed);
-		input->setKeyUp(sf::Keyboard::S);
 	}
 	if (input->isKeyDown(sf::Keyboard::A)) {
 		walk.setFlipped(true);
 		velocity += sf::Vector2f(-movementSpeed, 0.0f);
-		input->setKeyUp(sf::Keyboard::A);
 	}
 	velocity *= dt;
 }
